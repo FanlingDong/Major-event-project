@@ -7,7 +7,7 @@ const cors = require('cors');
 app.use(cors());
 
 // 配置解析表单数据的中间件
-// 注意：这个中间件只能解析
+// 注意：这个中间件只能解析application/x-www-form-urlencoded格式的表单数据
 app.use(express.urlencoded({extended: false}))
 
 app.listen(3007, () => {
