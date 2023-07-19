@@ -6,6 +6,6 @@ const {regUser, loginUser} = require('../router_handler/user')
 
 router.post('/register', regUser)
 
-router.post('/login',loginUser)
+router.post('/login', loginUser)
 
 module.exports = router
