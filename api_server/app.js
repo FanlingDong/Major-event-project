@@ -10,6 +10,10 @@ app.use(cors());
 // 注意：这个中间件只能解析application/x-www-form-urlencoded格式的表单数据
 app.use(express.urlencoded({extended: false}))
 
+// 导用并使用用户路由模块
+const userRouter = require('./router/user');
+app.use('/api', userRouter)
+
 app.listen(3007, () => {
     console.log('server running at http://127.0.0.1:3007')
 })
