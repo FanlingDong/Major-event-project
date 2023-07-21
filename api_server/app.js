@@ -20,6 +20,7 @@ app.use((req, res, next) => {
             message: err instanceof Error ? err.message : err
         })
     }
+    next();
 })
 
 // 导用并使用用户路由模块
