@@ -39,7 +39,22 @@ const regUser = (req, res) => {
 
 // 登录的处理函数
 const loginUser = (req, res) => {
-    res.send('Login OK')
+    const userInfo = req.body
+    const sql = 'SELECT * FROM ev_users WHERE username=?';
+    db.query(sql, userInfo.username, (err, result) => {
+        // 执行 SQL 语句失败
+        if (err) return res.cc(err)
+
+        // 执行SQL 语句成功，但是获取到的数据条数不等于1
+        if (result.length !== 1) return res.cc('登录失败！')
+
+        // 用 bcrypt.compareSync(前端数据, 数据库存储数据) 判断前端提交的密码是否正确
+        const compareResult = bcrypt.compareSync(userInfo.password, result[0].password)
+        if (!compareResult) return res.cc('密码不符，登录失败！')
+
+        // 在服务器端生成 Token 的字符串
+        res.cc('登录成功！')
+    })
 }
 
 module.exports = {

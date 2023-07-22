@@ -11,6 +11,6 @@ const {reg_login_schema} = require('../schema/user')
 
 router.post('/register', expressJoi(reg_login_schema), regUser)
 
-// router.post('/login', loginUser)
+router.post('/login', expressJoi(reg_login_schema), loginUser)
 
 module.exports = router
