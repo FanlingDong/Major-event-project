@@ -8,9 +8,10 @@ const regUser = (req, res) => {
     // 获取客户端提交到服务器的
     const userInfo = req.body
     // 对表单中的数据，进行合法性的校验
-    if (!userInfo.username || !userInfo.password) {
-        return res.cc('用户名或密码不合法！')
-    }
+    // if (!userInfo.username || !userInfo.password) {
+    //     return res.cc('用户名或密码不合法！')
+    // }
+
     // 定义 SQL 语句，查询用户名是否被占用
     const sqlStr = 'SELECT * FROM ev_users WHERE username=?';
     db.query(sqlStr, userInfo.username, (err, result) => {
