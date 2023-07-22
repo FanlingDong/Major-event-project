@@ -61,11 +61,11 @@ const loginUser = (req, res) => {
         // 对用户的信息进行加密，生成Token 字符串
         const tokenStr = jwt.sign(user, config.jwtSecretKey, {expiresIn: config.expiresIn})
         console.log(tokenStr)
-        //
+        // 调用 res.send() 将Token 响应给客户端
         res.send({
             status: 0,
             message: '登录成功！',
-            token: tokenStr,
+            token: 'Bearer ' + tokenStr,
         })
     })
 }
