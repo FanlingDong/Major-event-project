@@ -1,7 +1,11 @@
 // 导入数据库操作模块
-const db = require('../db/index')
+const db = require('../db/index');
 // 导入 bcryptjs 这个包
-const bcrypt = require('bcryptjs')
+const bcrypt = require('bcryptjs');
+// 导入生成Token的包
+const jwt = require('jsonwebtoken');
+// 导入全局的配置文件
+const config = require('../config')
 
 // 注册新用户的处理函数
 const regUser = (req, res) => {
@@ -53,7 +57,16 @@ const loginUser = (req, res) => {
         if (!compareResult) return res.cc('密码不符，登录失败！')
 
         // 在服务器端生成 Token 的字符串
-        res.cc('登录成功！')
+        const user = {...result[0], password: '', user_pic: ''}
+        // 对用户的信息进行加密，生成Token 字符串
+        const tokenStr = jwt.sign(user, config.jwtSecretKey, {expiresIn: config.expiresIn})
+        console.log(tokenStr)
+        //
+        res.send({
+            status: 0,
+            message: '登录成功！',
+            token: tokenStr,
+        })
     })
 }
 
