@@ -5,8 +5,12 @@ const router = express()
 
 // 导入路由处理函数模块
 const userInfoHandler = require('../router_handler/userinfo')
+
 // 获取用户的基本信息的路由
 router.get('/userinfo', userInfoHandler.getUserInfo)
+
+// 更新用户信息的路由
+router.post('/userinfo', userInfoHandler.updateUserInfo)
 
 
 module.exports = router
