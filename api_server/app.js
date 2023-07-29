@@ -28,6 +28,7 @@ app.use((req, res, next) => {
 const {expressjwt : expressJwt} = require('express-jwt');
 const config = require('./config');
 
+// 使用 .unless({ path: [/^\/api\//] }) 指定哪些接口不需要进行 Token 的身份认证
 app.use(expressJwt({secret: config.jwtSecretKey, algorithms: ["HS256"]}).unless({path: [/^\/api\//]}))
 
 // 导用并使用用户路由模块
