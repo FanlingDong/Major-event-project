@@ -36,3 +36,10 @@ exports.update_userinfo_schema = {
         email: user_email,
     },
 }
+
+exports.update_password_schema = {
+    body: {
+        oldPwd: password,
+        newPwd: joi.not(joi.ref('oldPwd')).concat(password),
+    }
+}
